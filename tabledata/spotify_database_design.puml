@@ -1,0 +1,64 @@
+@startuml White
+entity User {
+    * id: INT <<PK>>
+    --
+    * email: VARCHAR
+    * name: VARCHAR
+    --
+    is_artist: BOOLEAN
+    birthday: DATE
+}
+
+' Follow connector to artist from user
+entity ArtistFollower {
+    * id: INT <<PK>>
+    * user_id: INT <<FK |> User>>
+    --
+    * artist_name: INT <<FK |> Artist>>
+}
+
+entity Artist {
+    * id: INT <<PK>>
+    * user_id: INT <<FK |> User>>
+    --
+    * name: VARCHAR
+    * description: TEXT
+}
+
+entity Album {
+    * id: INT <<PK>>
+    --
+    title: VARCHAR
+    release: YEAR
+    image: VARCHAR
+    * artist_id: INT <<FK |> Artist>>
+    * user_id: INT <<FK |> User>>
+}
+
+entity Song {
+    * id: INT <<PK>>
+    --
+    * album_id: VARCHAR
+    * title: VARCHAR
+    * duration: INT
+    * description: TEXT
+    * artist_id: INT
+}
+
+entity Concert {
+    * id: INT <<PK>>
+    --
+    * location: VARCHAR
+    * event_at: DATETIME
+    * url: VARCHAR
+    longitude: DOUBLE
+    latitude: DOUBLE
+    * artist_id: INT
+}
+
+User }o--o{ Artist : Follow
+Artist }|--|{ Album : Has Album
+Artist }o--o{ Song : Sings the Song
+Artist }o--o{ Concert : Perform on Concert
+Album ||--|{ Song : Contain Songs
+@enduml
