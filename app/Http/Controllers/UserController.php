@@ -67,4 +67,13 @@ class UserController extends Controller {
 
         return $this->userService->update($request, $id);
     }
+
+    public function destroy(int $id): RedirectResponse
+    {
+        $user = User::find($id);
+
+        $user->delete();
+
+        return redirect(route('register'));
+    }
 }

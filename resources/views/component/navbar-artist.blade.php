@@ -6,10 +6,10 @@
         <div class="collapse navbar-collapse">
             <div class="navbar-nav me-auto mb-lg-0">
                 @auth
-                    <a class="nav-link" href="{{route('logout')}}">Logout</a>
-                    <a class="nav-link" href="{{route('home')}}">Home</a>
-                    <a class="nav-link" href="{{route('dashboard')}}">My Dashboard</a>
-                    <form class="d-flex mx-5" role="search">
+                <a class="nav-link" href="{{route('home')}}">Home</a>
+                <a class="nav-link" href="{{route('dashboard')}}">My Dashboard</a>
+                <a class="nav-link" href="{{route('artist_edit', session()->get('artist_id'))}}">Profile Artist</a>
+                <form class="d-flex mx-5" role="search">
                         <input class="form-control me-2 border-dark-subtle" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>

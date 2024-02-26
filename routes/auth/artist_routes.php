@@ -12,6 +12,5 @@ Route::prefix('/artist')->group(function() {
         Route::get('/dashboard', [ArtistController::class, 'dashboard'])->name('dashboard');
         Route::get('/edit/{id}', [ArtistController::class, 'edit'])->name('artist_edit');
         Route::put('/edit/{id}', [ArtistController::class, 'update'])->name('artist_update');
-        Route::delete('/remove/{id}', [ArtistController::class, 'destroy'])->name('artist_remove');
     });
 });

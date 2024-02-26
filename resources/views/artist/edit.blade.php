@@ -1,19 +1,20 @@
 @extends('layouts.base')
 
 @section('title')
-    Register as a artist
+    Edit as a artist
 @endsection
 
 @section('content') 
-    <h1 class="text-secondary-emphasis mx-3 text-center">Register as a artist</h1>
-    <form action="{{route('artist_update', $artist->id)}}" method="PUT" class="container mt-3 g-3">
+    <h1 class="text-secondary-emphasis mx-3 text-center">Edit as a artist</h1>
+    <form action="{{route('artist_update', $artist->name)}}" method="POST" class="container mt-3 g-3">
+        @method('PUT')
         @csrf
-        <input type="text" class="form-control mb-3" name="name" id="name" placeholder="Name...">
+        <input type="text" class="form-control mb-3" name="name" id="name" value="{{$artist->name}}" placeholder="Name...">
         @error('name')
             <div>{{$message}}</div>
         @enderror
 
-        <textarea name="description" id="description" cols="30" rows="10" placeholder="Description..."></textarea>
+        <textarea name="description" id="description" cols="30" rows="10" placeholder="Description...">{{$artist->description}}</textarea>
         @error('description')
             <div>{{$message}}</div>
         @enderror

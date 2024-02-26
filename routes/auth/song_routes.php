@@ -8,5 +8,4 @@ Route::middleware(['auth.session', 'artist'])->prefix('/song')->group(function()
     Route::post('/', [SongController::class, 'store']);
     Route::get('/{id}', [SongController::class, 'show'])->name('song_id');
     Route::put('/{id}', [SongController::class, 'update']);
-    Route::delete('/{id}', [SongController::class, 'destroy']);
 });

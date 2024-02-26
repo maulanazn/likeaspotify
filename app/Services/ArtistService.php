@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Models\Artist;
+use App\Models\Song;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -24,11 +25,31 @@ class ArtistService {
         return redirect(route('home'));
     }
 
-    public function update(Request $request, int $id): RedirectResponse {
-        Artist::query()->find($id)->update([
+    public function update(Request $request, string $id): RedirectResponse {
+        $artist = Artist::query()->where('name', '=', $id)->first();
+        
+        $artist_query = Artist::query()->where('id', $artist->id)->first();
+        Artist::query()->where('id', $artist->id)->update([
             'name' => $request->name,
             'description' => $request->description
         ]);
+
+        Song::query()->where('artist', $artist_query->name)->update([
+            'artist' => $artist_query->name
+        ]);
+        
+        $song_update = Song::query()->where('artist', '=', $artist->name)->get();
+        foreach ($song_update as $song) {
+            for ($i=0; $i < count($song->feat); $i++) { 
+                $data = "";
+                if ($artist_query->name === $song->feat[$i]) {
+                    $data = $song->feat[$i];
+                    Song::query()->where('artist', $artist_query->name)->update([
+                        'feat' => $data
+                    ]);
+                }
+            }
+        }
 
         return redirect(route('dashboard'));
     }

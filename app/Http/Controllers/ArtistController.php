@@ -34,10 +34,12 @@ class ArtistController extends Controller
 
     public function edit(): View
     {
-        return view(null);
+        $artist = Artist::query()->where('name', '=', session()->get('artist_id'))->first();
+
+        return view('artist.edit', compact('artist'));
     }
 
-    public function update(Request $request, int $id): RedirectResponse
+    public function update(Request $request, string $id): RedirectResponse
     {
         $request->validate([
             'name' => ['required', 'string'],
@@ -45,22 +47,6 @@ class ArtistController extends Controller
         ]);
 
         return $this->artistService->update($request, $id);
-    }
-
-    public function destroy(Request $request, int $id): RedirectResponse
-    {
-        $user_id = $request->session()->get('user_id');
-
-        User::query()->find($user_id)->update([
-            'is_artist' => 0
-        ]);
-
-        Artist::query()->find($id)->delete();
-
-        $request->session()->invalidate();
-        \Auth::logout();
-
-        return redirect(route('login'));
     }
 
     public function dashboard(Request $request): View
