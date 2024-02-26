@@ -7,6 +7,13 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## About project
+
+Spotify is an application that serve a million of music collections from various artists. This project is about to clone the main system of spotify, later the user interface will be similar as the project goes.
+
+here's the preview of the application:
+- [Like a Spotify (Preview 1)](https://youtu.be/iLm82d9KNkI).
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
