@@ -8,12 +8,14 @@ use Illuminate\View\View;
 
 class UserService {
     public function register(Request $request): RedirectResponse {
-        $user = User::query()->create([
+        User::query()->create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => \Hash::make($request->password),
             'birthday' => $request->birthday,
         ]);
+
+        $request->session()->put('username', $request->name);
 
         return redirect(route('login'));
     }

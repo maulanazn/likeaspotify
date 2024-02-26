@@ -1,11 +1,12 @@
 <?php
+use App\Http\Controllers\SongController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/song', null);
-Route::middleware(['auth.session', 'artist'])->group(function() {
-    Route::get('/song/{artist_id}', null)->name('artist_song');
-    Route::post('/song/{artist_id}', null);
-    Route::get('/song/{id}', null)->name('song_id');
-    Route::put('/song/{id}', null);
-    Route::delete('/song/{id}', null);
+Route::middleware(['auth.session', 'artist'])->prefix('/song')->group(function() {
+    Route::get('/songs', [SongController::class, 'index'])->name('artist_song');
+    Route::get('/', [SongController::class, 'create'])->name('create_song');
+    Route::post('/', [SongController::class, 'store']);
+    Route::get('/{id}', [SongController::class, 'show'])->name('song_id');
+    Route::put('/{id}', [SongController::class, 'update']);
+    Route::delete('/{id}', [SongController::class, 'destroy']);
 });

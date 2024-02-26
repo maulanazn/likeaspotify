@@ -65,8 +65,10 @@ class ArtistController extends Controller
 
     public function dashboard(Request $request): View
     {
-        $artist = Artist::query()->where('username', $request->session()->get('username'))->first();
-        
+        $artist = Artist::query()->where('username', $request->session()->get('username'))->first('name');
+
+        $request->session()->put('artist_id', $artist->name);
+
         return view('artist.dashboard', compact('artist'));
     }
 }

@@ -15,10 +15,16 @@
                     </form>
                 </div>
                 <div class="d-flex mb-3 mx-3 gap-5">
-                    <a class="nav-link" href="#">Song</a>
-                    <a class="nav-link" href="#">Album</a>
-                    <a class="nav-link" href="#">Concert</a>
+                    @if (\Illuminate\Support\Facades\Route::getCurrentRoute()->getPrefix() === "/song")
+                        <a class="nav-link text-success" href="{{route('create_song')}}" class="fixed-sticky">Add Song</a>
+                    @endif
+                    <a class="nav-link" href="{{route('artist_song')}}">Song</a>
+                    @if (\Illuminate\Support\Facades\Route::getCurrentRoute()->getPrefix() !== "/song")
+                        <a class="nav-link" href="#">Album</a>
+                        <a class="nav-link" href="#">Concert</a>
+                    @endif
                 </div>
+
             @endauth
         </div>
     </div>
